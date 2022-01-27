@@ -22,6 +22,14 @@ class BinarySearch:
     def getlocation(self):
         self.getmidpoint(self.search_list)
 
+    def print_one(self):
+        print(self.search_list)
+
+
+if __name__ == "__main__":
+    bs = BinarySearch([1,23,4,5,6,7], 23)
+    bs.print_one()
+
 
     
 
