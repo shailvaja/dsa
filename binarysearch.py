@@ -1,34 +1,42 @@
-import re
+
 
 
 class BinarySearch:
     def __init__(self, list, element) -> None:
-        self.search_list = list
-        self.location_list = [range(0,len(self.search_list)-1, 1)]
+        self.search_list = sorted(list)
         self.element = element
+        self.lower = 0
+        self.upper = len(list)-1
 
-    def getmidpoint(self, list):
-        list_len = len(list)
-        return list_len//2
+    def getmidpoint(self):
+        return (self.lower + self.upper + 1) // 2 
 
-    def compare_element(self, current_element, element):
-        if current_element > element:
-            return 0
-        elif current_element < element:
-            return 1 
+    def compare_element(self, midpoint):
+        if self.search_list[midpoint] > self.element:
+            return "Lesser"
+        elif self.search_list[midpoint] < self.element:
+            return "Greater" 
         else:
-            return current_element
-    
-    def getlocation(self):
-        self.getmidpoint(self.search_list)
+            return midpoint 
 
-    def print_one(self):
-        print(self.search_list)
+    def binary_search(self):
+        mp = self.getmidpoint()
+        result = self.compare_element(mp)
+        while True:
+            if result == "Greater":
+                self.lower = mp
+            elif result == "Lesser":
+                self.upper= mp
+            else:
+                return result
+            mp = self.getmidpoint()
+            result = self.compare_element(mp)
+
 
 
 if __name__ == "__main__":
     bs = BinarySearch([1,23,4,5,6,7], 23)
-    bs.print_one()
+    print(bs.binary_search())
 
 
     
